@@ -1,6 +1,6 @@
 Name:           bakefile
 Version:        0.2.8
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
 Group:          Development/Tools
 License:        MIT
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/aclocal/*.m4
 
 %changelog
+* Wed Aug 11 2010 David Malcolm <dmalcolm@redhat.com> - 0.2.8-4
+- recompiling .py files against Python 2.7 (rhbz#623276)
+
 * Tue Mar 02 2010 Filipe Rosset <rosset.filipe@gmail.com> - 0.2.8-3
 - Fixed Source url
 - Updated BuildRequires and Requires info
