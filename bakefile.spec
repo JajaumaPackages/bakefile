@@ -1,11 +1,12 @@
 Name:           bakefile
 Version:        0.2.8
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
 Group:          Development/Tools
 License:        MIT
 URL:            http://www.bakefile.org/
 Source:         http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Patch0:         bakefile-028-fix-import.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libxml2-python python-devel
@@ -18,6 +19,7 @@ makefile (autoconf's Makefile.in, Visual C++ project, bcc makefile etc.)
 
 %prep
 %setup -q
+%patch0 -p0
 
 
 %build
@@ -46,7 +48,11 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_libdir}/%{name}/_bkl_c.la
 %{_datadir}/aclocal/*.m4
 
+
 %changelog
+* Sun Jan 02 2011 Filipe Rosset <rosset.filipe@gmail.com> - 0.2.8-5
+- fix for rhbz#633520 and rhbz#652887 (thanks to Jonathan Wakely and Josef Šimánek)
+
 * Wed Aug 11 2010 David Malcolm <dmalcolm@redhat.com> - 0.2.8-4
 - recompiling .py files against Python 2.7 (rhbz#623276)
 
