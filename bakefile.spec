@@ -1,6 +1,6 @@
 Name:           bakefile
 Version:        0.2.8
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
 Group:          Development/Tools
 License:        MIT
@@ -50,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jan 12 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.2.8-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Mon Feb 07 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.2.8-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
