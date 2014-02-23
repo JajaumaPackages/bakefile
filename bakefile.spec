@@ -1,12 +1,13 @@
 Name:           bakefile
 Version:        0.2.9
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
 Group:          Development/Tools
 License:        MIT
 URL:            http://www.bakefile.org/
 Source:         http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:         bakefile-028-fix-import.patch
+Patch1:         bakefile-format-security.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libxml2-python python-devel
@@ -20,21 +21,18 @@ makefile (autoconf's Makefile.in, Visual C++ project, bcc makefile etc.)
 %prep
 %setup -q
 %patch0 -p0
-
+%patch1 -p1
 
 %build
 %configure
 make %{?_smp_mflags}
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
-
 %clean
 rm -rf $RPM_BUILD_ROOT
-
 
 %files
 %defattr(-,root,root,-)
@@ -48,8 +46,10 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_libdir}/%{name}/_bkl_c.la
 %{_datadir}/aclocal/*.m4
 
-
 %changelog
+* Sun Feb 23 2014 Filipe Rosset <rosset.filipe@gmail.com> - 0.2.9-4
+- Fix FTBFS -Werror=format-security rhbz #1036997 (thanks to Dhiru Kholia)
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.2.9-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
