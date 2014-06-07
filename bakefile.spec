@@ -1,6 +1,6 @@
 Name:           bakefile
 Version:        0.2.9
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
 Group:          Development/Tools
 License:        MIT
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/aclocal/*.m4
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.2.9-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Sun Feb 23 2014 Filipe Rosset <rosset.filipe@gmail.com> - 0.2.9-4
 - Fix FTBFS -Werror=format-security rhbz #1036997 (thanks to Dhiru Kholia)
 
