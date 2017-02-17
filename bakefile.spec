@@ -1,6 +1,6 @@
 Name:           bakefile
 Version:        0.2.9
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
 Group:          Development/Tools
 License:        MIT
@@ -8,9 +8,11 @@ URL:            http://www.bakefile.org/
 Source:         http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:         bakefile-028-fix-import.patch
 Patch1:         bakefile-format-security.patch
+Patch2:         bakefile-swig-interface.patch
+Patch3:         bakefile-rtti-support.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  libxml2-python python-devel
+BuildRequires:  libxml2-python python-devel swig
 Requires:       python >= 2.3.0 automake python-empy
 
 %description
@@ -22,8 +24,13 @@ makefile (autoconf's Makefile.in, Visual C++ project, bcc makefile etc.)
 %setup -q
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
+pushd src
+swig -python bkl_c.i
+popd
 %configure
 make %{?_smp_mflags}
 
@@ -47,6 +54,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/aclocal/*.m4
 
 %changelog
+* Fri Feb 17 2017 Scott Talbert <swt@techie.net> - 0.2.9-10
+- Fix segfault issue by patching swig interface file (#1419786)
+- Apply patch from upstream for fixing RTTI support
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.2.9-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
