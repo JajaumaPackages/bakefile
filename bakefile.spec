@@ -1,16 +1,14 @@
 Name:           bakefile
 Version:        0.2.10
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
-Group:          Development/Tools
 License:        MIT
 URL:            http://www.bakefile.org/
-Source:         http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Source:         https://github.com/vslavik/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
 Patch0:         bakefile-028-fix-import.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  libxml2-python python-devel swig
-Requires:       python >= 2.3.0 automake python-empy
+BuildRequires:  python-libxml2 python2-devel swig
+Requires:       automake python2-empy
 
 %description
 Bakefile is cross-platform, cross-compiler native makefiles generator. It takes
@@ -29,14 +27,9 @@ popd
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root,-)
 %doc COPYING AUTHORS NEWS README THANKS
 %{_bindir}/bakefil*
 %{_datadir}/bakefile
@@ -48,6 +41,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/aclocal/*.m4
 
 %changelog
+* Fri Jul 28 2017 Scott Talbert <swt@techie.net> - 0.2.10-3
+- Modernize packaging
+
 * Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.2.10-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
