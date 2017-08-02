@@ -1,6 +1,6 @@
 Name:           bakefile
 Version:        0.2.10
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
 License:        MIT
 URL:            http://www.bakefile.org/
@@ -41,6 +41,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_datadir}/aclocal/*.m4
 
 %changelog
+* Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.2.10-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
+
 * Fri Jul 28 2017 Scott Talbert <swt@techie.net> - 0.2.10-3
 - Modernize packaging
 
