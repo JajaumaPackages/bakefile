@@ -1,13 +1,18 @@
 Name:           bakefile
 Version:        0.2.10
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A cross-platform, cross-compiler native makefiles generator
 License:        MIT
 URL:            http://www.bakefile.org/
 Source:         https://github.com/vslavik/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
 Patch0:         bakefile-028-fix-import.patch
 
-BuildRequires:  python-libxml2 python2-devel swig
+%if 0%{?fedora} || 0%{?rhel} > 7
+BuildRequires:  python-libxml2
+%else
+BuildRequires:  libxml2-python
+%endif
+BuildRequires:  python2-devel swig
 Requires:       automake python2-empy
 
 %description
@@ -41,6 +46,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_datadir}/aclocal/*.m4
 
 %changelog
+* Sun Sep 03 2017 Jajauma's Packages <jajauma@yandex.ru> - 0.2.10-5
+- Require libxml2-python for building on RHEL7
+
 * Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.2.10-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
